@@ -23,7 +23,8 @@ func main() {
 		WithMountedDirectory("/app/src", src).
 		WithMountedDirectory("app/tests", tests).
 		WithWorkdir("/app/tests/CitiesApp.IntegrationTests").
-		WithEnvVariable("DOCKER_HOST", "tcp://host.docker.internal:2375").
+		// WithEnvVariable("DOCKER_HOST", "tcp://host.docker.internal:2375").
+		WithEnvVariable("DOCKER_HOST", "tcp://docker:2375").
 		WithExec([]string{"dotnet", "test"})
 
 	_, err = container.Stdout(context.Background())
