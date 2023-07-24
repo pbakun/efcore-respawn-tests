@@ -20,6 +20,8 @@ jobs:
         image: docker:24.0-dind
         ports:
           - 2375:2375
+        env:
+          DOCKER_TLS_CERTDIR: ""
 
     steps:
     - uses: actions/checkout@v3
