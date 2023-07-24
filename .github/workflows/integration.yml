@@ -9,10 +9,19 @@ on:
   pull_request:
     branches: [ "master" ]
 
+env:
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+  
+
 jobs:
 
   build:
     runs-on: ubuntu-latest
+    
+    services:
+      image: docker:24.0-dind
+    
     steps:
     - uses: actions/checkout@v3
 
@@ -23,9 +32,6 @@ jobs:
 
     - name: Set permissions on docker socket
       run: ls -l /var/run/docker.sock
-      
-    - name: who am i
-      run: docker ps
       
 #     - name: Run Integration Tests
 #       run: go run pipeline.go
