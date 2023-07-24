@@ -24,7 +24,6 @@ jobs:
           DOCKER_TLS_CERTDIR: ""
 
     steps:
-    - uses: actions/checkout@v3
 
     - name: Set up Go
       uses: actions/setup-go@v4
@@ -34,6 +33,7 @@ jobs:
     - name: Test
       run: docker ps -a
 
-    - name: Run Integration Tests
+    - uses: actions/checkout@v3
+    - name: Run Dagger pipeline
       run: go run pipeline.go
 
