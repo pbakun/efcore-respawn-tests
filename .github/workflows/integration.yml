@@ -23,6 +23,9 @@ jobs:
           DOCKER_TLS_CERTDIR: ""
         ports:
           - 2375:2375
+        options: >-
+          --group-add=$(stat -c %g /var/run/docker.sock)
+          --group-add=$(stat -c %g /var/run/docker.sock)
 
     steps:
     - uses: actions/checkout@v3
