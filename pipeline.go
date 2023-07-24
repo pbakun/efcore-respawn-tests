@@ -24,7 +24,8 @@ func main() {
 		WithMountedDirectory("app/tests", tests).
 		WithWorkdir("/app/tests/CitiesApp.IntegrationTests").
 		// WithEnvVariable("DOCKER_HOST", "tcp://host.docker.internal:2375").
-		WithUnixSocket("/var/run/docker.sock", client.Host().UnixSocket("/var/run/docker.sock")).
+		WithEnvVariable("DOCKER_HOST", "tcp://docker:2375").
+		// WithUnixSocket("/var/run/docker.sock", client.Host().UnixSocket("/var/run/docker.sock")).
 		WithExec([]string{"dotnet", "test"})
 
 	_, err = container.Stdout(context.Background())
