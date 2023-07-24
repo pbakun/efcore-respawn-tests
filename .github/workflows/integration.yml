@@ -32,6 +32,6 @@ jobs:
     - name: Test
       run: docker ps -a
 
-    # - name: Run Integration Tests
-    #   run: go run pipeline.go
+    - name: Run Integration Tests
+      run: go run pipeline.go
 
