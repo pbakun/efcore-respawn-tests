@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using CitiesApp.Application.Cities.AddCity;
-using CitiesApp.Application.Cities.GetCity;
+using CitiesApp.Application.Cities.GetCitiesWithinDistance;
 using CitiesApp.Application.Cities.ListCities;
 using CitiesApp.Application.Cities.AddSearchedCity;
 
@@ -20,10 +20,10 @@ namespace CitiesApp.Controllers
 
         [HttpGet]
         [Route("{name}")]
-        public async Task<IActionResult> GetCity(string name)
+        public async Task<IActionResult> GetCitiesWithinDistance(string name, [FromQuery]double distance)
         {
-            var city = await _mediator.Send(new GetCityQuery(name));
-            return Ok(city);
+            var cities = await _mediator.Send(new GetCitiesWithinDistanceQuery(name, distance));
+            return Ok(cities);
         }
 
         [HttpGet]

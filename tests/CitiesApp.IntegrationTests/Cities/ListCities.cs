@@ -6,10 +6,10 @@ using Xunit.Abstractions;
 
 namespace CitiesApp.IntegrationTests.Cities
 {
-    public class ListCitiesTest : IntegrationTest
+    public class ListCities : IntegrationTest
     {
         private readonly ITestOutputHelper _outputHelper;
-        public ListCitiesTest(CustomWebApplicationFactory<Program> webApplicationFactory, ITestOutputHelper outputHelper) : base(webApplicationFactory)
+        public ListCities(CustomWebApplicationFactory<Program> webApplicationFactory, ITestOutputHelper outputHelper) : base(webApplicationFactory)
         {
             _outputHelper = outputHelper;
         }
