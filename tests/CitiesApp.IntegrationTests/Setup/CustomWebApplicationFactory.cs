@@ -10,6 +10,7 @@ using Respawn;
 using System.Data.Common;
 using CitiesApp.Infrastructure;
 using CitiesApp.Infrastructure.Database;
+using Respawn.Graph;
 
 namespace CitiesApp.IntegrationTests.Setup
 {
@@ -57,6 +58,11 @@ namespace CitiesApp.IntegrationTests.Setup
             respawner = await Respawner.CreateAsync(conn, new RespawnerOptions
             {
                 SchemasToInclude = new[] { "public" },
+                TablesToIgnore = new Table[]
+                {
+                    "__EFMigrationsHistory",
+                    "spatial_ref_sys"
+                },
                 DbAdapter = DbAdapter.Postgres
             });
         }
