@@ -1,12 +1,5 @@
 ﻿using CitiesApp.Infrastructure.Database;
-using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit.Abstractions;
 
 namespace CitiesApp.IntegrationTests.Setup
 {
@@ -26,9 +19,9 @@ namespace CitiesApp.IntegrationTests.Setup
             HttpClient = webApplicationFactory.CreateClient();
         }
 
-        public Task InitializeAsync() => Task.CompletedTask;
+        public virtual Task InitializeAsync() => Task.CompletedTask;
 
-        public async Task DisposeAsync()
+        public virtual async Task DisposeAsync()
         {
             await WebApplicationFactory.ResetDatabaseAsync();
             Scope.Dispose();
