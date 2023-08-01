@@ -11,7 +11,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Respawn;
 using Respawn.Graph;
 using System.Data.Common;
-using Xunit.Abstractions;
 
 namespace CitiesApp.IntegrationTests.Setup
 {
