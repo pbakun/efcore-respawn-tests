@@ -19,6 +19,5 @@ namespace CitiesApp.Infrastructure.Database
                 .HasColumnType("geography (point)");
             
         }
-
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CitiesApp.Infrastructure.Database;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CitiesApp.IntegrationTests.Setup
@@ -15,8 +16,12 @@ namespace CitiesApp.IntegrationTests.Setup
         {
             WebApplicationFactory = webApplicationFactory;
             Scope = webApplicationFactory.Services.CreateScope();
-            Db = Scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
             HttpClient = webApplicationFactory.CreateClient();
+
+            var builder = new DbContextOptionsBuilder();
+            builder.ConfigureOptions(WebApplicationFactory.DbConnectionString);
+            Db = new ApplicationDbContext(builder.Options);
+            Db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 
         public virtual Task InitializeAsync() => Task.CompletedTask;

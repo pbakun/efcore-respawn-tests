@@ -16,8 +16,9 @@ namespace CitiesApp.Infrastructure
                 cfg.RegisterServicesFromAssembly(Assembly.Load("CitiesApp.Application"));
             });
 
-            services.AddDbContext<ApplicationDbContext>(opt =>
-                opt.UseNpgsql(databaseConnectionString, o => o.UseNetTopologySuite()),
+
+            services.AddDbContext<ApplicationDbContext>(opt => 
+                opt.ConfigureOptions(databaseConnectionString),
                 ServiceLifetime.Scoped);
 
             services.AddHttpClient();

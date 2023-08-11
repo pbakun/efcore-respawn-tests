@@ -16,6 +16,8 @@ namespace CitiesApp.IntegrationTests.Setup
 {
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>, IAsyncLifetime where TStartup : class
     {
+        public string DbConnectionString { get; private set; }
+
         private const int PostgresPort = 5432;
         private readonly IContainer _dbContainer;
 
@@ -41,8 +43,7 @@ namespace CitiesApp.IntegrationTests.Setup
                 var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
                 if (descriptor != null)
                     services.Remove(descriptor);
-                string connectionString = $"Host={_dbContainer.Hostname};Port={_dbContainer.GetMappedPublicPort(PostgresPort)};Database=integration_tests; Username=root; Password=mypassword;Pooling=true;Maximum Pool Size=1024;";
-                services.AddInfrastructure(connectionString);
+                services.AddInfrastructure(DbConnectionString);
 
                 var provider = services.BuildServiceProvider();
                 using var scope = provider.CreateScope();
@@ -82,6 +83,7 @@ namespace CitiesApp.IntegrationTests.Setup
         public async Task InitializeAsync()
         {
             await _dbContainer.StartAsync().ConfigureAwait(false);
+            DbConnectionString = $"Host={_dbContainer.Hostname};Port={_dbContainer.GetMappedPublicPort(PostgresPort)};Database=integration_tests; Username=root; Password=mypassword;Pooling=true;Maximum Pool Size=1024;";
         }
 
         async Task IAsyncLifetime.DisposeAsync()
