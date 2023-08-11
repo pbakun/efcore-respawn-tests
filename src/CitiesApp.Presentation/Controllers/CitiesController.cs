@@ -4,6 +4,8 @@ using CitiesApp.Application.Cities.AddCity;
 using CitiesApp.Application.Cities.GetCitiesWithinDistance;
 using CitiesApp.Application.Cities.ListCities;
 using CitiesApp.Application.Cities.AddSearchedCity;
+using CitiesApp.Domain.City;
+using CitiesApp.Application.Cities.RemoveCity;
 
 namespace CitiesApp.Controllers
 {
@@ -47,6 +49,19 @@ namespace CitiesApp.Controllers
         {
             _mediator.Send(new AddSearchedCityCommand(query));
 
+            return Ok();
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        public async Task<IActionResult> RemoveCity(string id)
+        {
+            if(!Guid.TryParse(id, out Guid cityId))
+            {
+                return BadRequest();
+            }
+
+            await _mediator.Send(new RemoveCityCommand(cityId));
             return Ok();
         }
     }
