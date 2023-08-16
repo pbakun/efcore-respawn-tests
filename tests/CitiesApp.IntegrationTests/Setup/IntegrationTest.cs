@@ -21,6 +21,7 @@ namespace CitiesApp.IntegrationTests.Setup
             var builder = new DbContextOptionsBuilder();
             builder.ConfigureOptions(WebApplicationFactory.DbConnectionString);
             Db = new ApplicationDbContext(builder.Options);
+            //Disable tracking enables reads on updated entities (UpdateCity tests)
             Db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
         }
 

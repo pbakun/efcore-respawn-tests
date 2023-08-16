@@ -6,6 +6,8 @@ using CitiesApp.Application.Cities.ListCities;
 using CitiesApp.Application.Cities.AddSearchedCity;
 using CitiesApp.Domain.City;
 using CitiesApp.Application.Cities.RemoveCity;
+using CitiesApp.Application.Cities.UpdateCity;
+using CitiesApp.Presentation.Model.City;
 
 namespace CitiesApp.Controllers
 {
@@ -62,6 +64,19 @@ namespace CitiesApp.Controllers
             }
 
             await _mediator.Send(new RemoveCityCommand(cityId));
+            return Ok();
+        }
+
+        [HttpPatch]
+        [Route("{id}")]
+        public async Task<IActionResult> UpdateCity(string id, [FromBody]UpdateCity city)
+        {
+            if (!Guid.TryParse(id, out Guid cityId))
+            {
+                return BadRequest();
+            }
+
+            await _mediator.Send(new UpdateCityCommand(cityId, city.Name));
             return Ok();
         }
     }

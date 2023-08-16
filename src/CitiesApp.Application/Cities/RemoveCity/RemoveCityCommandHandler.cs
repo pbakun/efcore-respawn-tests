@@ -1,5 +1,6 @@
 ﻿using CitiesApp.Application.Commands;
 using CitiesApp.Domain.City;
+using CitiesApp.Domain.Exception;
 using CitiesApp.Infrastructure.Database;
 using Microsoft.EntityFrameworkCore;
 
@@ -18,7 +19,7 @@ namespace CitiesApp.Application.Cities.RemoveCity
         {
             var city = await _dbContext.Cities.FirstOrDefaultAsync(x => x.Id == request.CityId);
             if (city == null)
-                throw new Exception("City does not exist");
+                throw new EntityNotFoundException();
             _dbContext.Remove<City>(city);
             await _dbContext.SaveChangesAsync();
         }

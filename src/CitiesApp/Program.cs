@@ -3,12 +3,14 @@ using System.Reflection;
 using CitiesApp.Infrastructure;
 using CitiesApp.Infrastructure.Database;
 using CitiesApp.Infrastructure.Exceptions;
+using CitiesApp.Infrastructure.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var presentationAssembly = typeof(CitiesApp.Presentation.AssemblyReference).Assembly;
-builder.Services.AddControllers().AddApplicationPart(presentationAssembly);
+builder.Services.AddControllers(conf => conf.Filters.Add<ApiExceptionFilter>())
+                .AddApplicationPart(presentationAssembly);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

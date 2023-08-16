@@ -28,5 +28,16 @@ namespace CitiesApp.IntegrationTests.Cities
             var removedCity = await Db.Cities.FirstOrDefaultAsync(x => x.Id == city.Id);
             removedCity.Should().BeNull();
         }
+
+
+        [Fact]
+        public async Task NotFound()
+        {
+            //act
+            var response = await HttpClient.DeleteAsync($"/api/cities/{Guid.NewGuid()}");
+
+            //assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.NotFound);
+        }
     }
 }
