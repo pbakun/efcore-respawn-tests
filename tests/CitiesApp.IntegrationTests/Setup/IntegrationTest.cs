@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace CitiesApp.IntegrationTests.Setup
 {
     [Collection(nameof(IntegrationTestCollection))]
-    public class IntegrationTest : IAsyncLifetime
+    public abstract class IntegrationTest : IAsyncLifetime
     {
         public readonly CustomWebApplicationFactory<Program> WebApplicationFactory;
         public readonly IServiceScope Scope;

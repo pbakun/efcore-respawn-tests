@@ -11,19 +11,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastru
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{874AB639-1981-41AB-BD90-32764AC8E0AD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Domain", "CitiesApp.Domain\CitiesApp.Domain.csproj", "{FF324041-E7CA-4977-9898-792FFBDD6BE2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Domain", "src\CitiesApp.Domain\CitiesApp.Domain.csproj", "{FF324041-E7CA-4977-9898-792FFBDD6BE2}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Application", "CitiesApp.Application\CitiesApp.Application.csproj", "{04F65241-ABCF-4970-826D-99C246DA63DD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Application", "src\CitiesApp.Application\CitiesApp.Application.csproj", "{04F65241-ABCF-4970-826D-99C246DA63DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Infrastructure", "CitiesApp.Infrastructure\CitiesApp.Infrastructure.csproj", "{E589DBD4-AF1F-480A-B08F-53BB929C9616}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Infrastructure", "src\CitiesApp.Infrastructure\CitiesApp.Infrastructure.csproj", "{E589DBD4-AF1F-480A-B08F-53BB929C9616}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Presentation", "CitiesApp.Presentation\CitiesApp.Presentation.csproj", "{539D59D1-AC9B-45A2-84FE-06BC34B8F6E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.Presentation", "src\CitiesApp.Presentation\CitiesApp.Presentation.csproj", "{539D59D1-AC9B-45A2-84FE-06BC34B8F6E7}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp", "CitiesApp\CitiesApp.csproj", "{CBD0F1FB-3124-4A20-A2B0-B604B0CEC58A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp", "src\CitiesApp\CitiesApp.csproj", "{CBD0F1FB-3124-4A20-A2B0-B604B0CEC58A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{ABAA1564-D409-44C2-B583-082F8389FFF3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.IntegrationTests", "..\tests\CitiesApp.IntegrationTests\CitiesApp.IntegrationTests.csproj", "{6617EFD6-F8C4-4FDB-9AFF-F9E641A8DB48}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CitiesApp.IntegrationTests", "tests\CitiesApp.IntegrationTests\CitiesApp.IntegrationTests.csproj", "{6617EFD6-F8C4-4FDB-9AFF-F9E641A8DB48}"
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{A67B78A0-51E0-4711-9052-8F1BA2A07029}"
 EndProject

@@ -33,7 +33,7 @@ namespace CitiesApp.Controllers
         [HttpGet]
         public async Task<IActionResult> ListCities()
         {
-            var cities = await _mediator.Send(new ListCitiesQuery(""));
+            var cities = await _mediator.Send(new ListCitiesQuery());
             return Ok(cities);
         }
 

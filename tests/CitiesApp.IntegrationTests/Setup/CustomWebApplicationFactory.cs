@@ -16,9 +16,15 @@ namespace CitiesApp.IntegrationTests.Setup
 {
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<TStartup>, IAsyncLifetime where TStartup : class
     {
-        public string DbConnectionString { get; private set; }
+        public string DbConnectionString { get; private set; } = string.Empty;
+        private struct DatabaseAccess
+        {
+            public const string Username = "root";
+            public const string Password = "password";
+            public const string DatabaseName = "integration_tests";
+            public const int Port = 5432;
+        }
 
-        private const int PostgresPort = 5432;
         private readonly IContainer _dbContainer;
 
         private Respawner respawner = default!;
@@ -27,12 +33,12 @@ namespace CitiesApp.IntegrationTests.Setup
         public CustomWebApplicationFactory()
         {
             _dbContainer = new ContainerBuilder().WithImage("postgis/postgis:latest")
-                                                .WithPortBinding(PostgresPort, true)
-                                                .WithEnvironment("POSTGRES_USER", "root")
-                                                .WithEnvironment("POSTGRES_PASSWORD", "mypassword")
-                                                .WithEnvironment("POSTGRES_DB", "integration_tests")
-                                                .WithEnvironment("PGPORT", PostgresPort.ToString())
-                                                .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(PostgresPort))
+                                                .WithPortBinding(DatabaseAccess.Port, true)
+                                                .WithEnvironment("POSTGRES_USER", DatabaseAccess.Username)
+                                                .WithEnvironment("POSTGRES_PASSWORD", DatabaseAccess.Password)
+                                                .WithEnvironment("POSTGRES_DB", DatabaseAccess.DatabaseName)
+                                                .WithEnvironment("PGPORT", DatabaseAccess.Port.ToString())
+                                                .WithWaitStrategy(Wait.ForUnixContainer().UntilPortIsAvailable(DatabaseAccess.Port))
                                                 .WithCleanUp(true)
                                                 .Build();
         }
@@ -50,8 +56,6 @@ namespace CitiesApp.IntegrationTests.Setup
                 var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
 
                 _databaseFacade = context.Database;
-
-                GetOpenedDbConnectionAsync().Wait();
 
                 context.Database.Migrate();
                 InitRespawner().Wait();
@@ -83,7 +87,9 @@ namespace CitiesApp.IntegrationTests.Setup
         public async Task InitializeAsync()
         {
             await _dbContainer.StartAsync().ConfigureAwait(false);
-            DbConnectionString = $"Host={_dbContainer.Hostname};Port={_dbContainer.GetMappedPublicPort(PostgresPort)};Database=integration_tests; Username=root; Password=mypassword;Pooling=true;Maximum Pool Size=1024;";
+            DbConnectionString = @$"Host={_dbContainer.Hostname};Port={_dbContainer.GetMappedPublicPort(DatabaseAccess.Port)};
+                                    Database={DatabaseAccess.DatabaseName};Username={DatabaseAccess.Username};Password={DatabaseAccess.Password};
+                                    Pooling=true;Maximum Pool Size=1024;";
         }
 
         async Task IAsyncLifetime.DisposeAsync()
